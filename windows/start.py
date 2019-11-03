@@ -14,7 +14,7 @@ import userHistoryLogin
 import getLogFile
 import networkSetting
 import GUI
-
+import getUserFootPrint
 
 
 def execCMD(command):
@@ -57,13 +57,28 @@ def startCollect():
 			print "+++++++ Done Get Process Tree+++++++"
 		except:
 			print "***** Error while trying to get Process Tree *****"
-	if getNetworkConfigCheck:
+	if getNetworkConfigCheck.get():
 		try:
 			print "-------Get Nerwork Config-------"	
 			networkSetting.getNetworkConfig()
 			print "+++++++ Done Get Nerwork Config+++++++"
 		except:
 			print "***** Error while trying to get Nerwork Config *****"
+	if fmhn.get():
+		try:
+			print "-------Get File Molidate History-------"
+			val = int(fmhn.get())
+			getUserFootPrint.getFileMolidateHistory(val)
+			print "+++++++ Done Get File Molidate History+++++++"
+		except ValueError:
+		   	print "***** Error while trying to get Nerwork Config Input Must Be A Number*****"
+	if getBroswerCacheCheck.get():
+		try:
+			print "-------Get Broswer Cache-------"	
+			getUserFootPrint.getCacheBroswer()
+			print "+++++++ Done Get Broswer Cache+++++++"
+		except:
+			print "***** Error while trying to get Broswer Cache *****"
 	master.quit()
 
 isAdmin()
@@ -71,14 +86,17 @@ master = Tk()
 getLoginHistoryCheck = IntVar()
 getProcessTreeCheck = IntVar()
 getNetworkConfigCheck = IntVar()
+getBroswerCacheCheck = IntVar()
+
 Label(master, text="Choose option").grid(row=0, sticky=W)
 Checkbutton(master, text="Login History", variable=getLoginHistoryCheck).grid(row=1, sticky=W)
 Checkbutton(master, text="Process Tree", variable=getProcessTreeCheck).grid(row=2, sticky=W)
 Checkbutton(master, text="Network Config", variable=getNetworkConfigCheck).grid(row=4, sticky=W)
-e1 = Entry(master)
-e1.grid(row=5, column=1)
-Label(master, text="File Molidate History (number)").grid(row=5)
-Button(master, text='Run check', command=startCollect).grid(row=6, sticky=W, pady=10)
+fmhn = Entry(master)
+fmhn.grid(row=5, column=1)
+Label(master, text="File Molidate History (input day)").grid(row=5)
+Checkbutton(master, text="Brower Cache", variable=getBroswerCacheCheck).grid(row=6, sticky=W)
+Button(master, text='Run check', command=startCollect).grid(row=7, sticky=W, pady=10)
 mainloop()
 
 
