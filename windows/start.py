@@ -61,12 +61,12 @@ def startCollect():
 		try:
 			print "-------Get Nerwork Config-------"	
 			networkSetting.getNetworkConfig()
-			print "+++++++ Done Get Process Tree+++++++"
+			print "+++++++ Done Get Nerwork Config+++++++"
 		except:
 			print "***** Error while trying to get Nerwork Config *****"
 	master.quit()
-isAdmin()
 
+isAdmin()
 master = Tk()
 getLoginHistoryCheck = IntVar()
 getProcessTreeCheck = IntVar()
@@ -75,8 +75,10 @@ Label(master, text="Choose option").grid(row=0, sticky=W)
 Checkbutton(master, text="Login History", variable=getLoginHistoryCheck).grid(row=1, sticky=W)
 Checkbutton(master, text="Process Tree", variable=getProcessTreeCheck).grid(row=2, sticky=W)
 Checkbutton(master, text="Network Config", variable=getNetworkConfigCheck).grid(row=4, sticky=W)
-
-Button(master, text='Run check', command=startCollect).grid(row=5, sticky=W, pady=10)
+e1 = Entry(master)
+e1.grid(row=5, column=1)
+Label(master, text="File Molidate History (number)").grid(row=5)
+Button(master, text='Run check', command=startCollect).grid(row=6, sticky=W, pady=10)
 mainloop()
 
 
