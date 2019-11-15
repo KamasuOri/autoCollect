@@ -1,6 +1,0 @@
-++ SUCCESS get ramDisk
-++ SUCCESS get ramDisk
-++ SUCCESS get ramDisk
-++ SUCCESS get diskImage
-++ SUCCESS get ramImage
-++ SUCCESS get diskImage
