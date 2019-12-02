@@ -1,7 +1,0 @@
-Physical hard drive:
-\\.\PhysicalDrive0
-Logical drive:
-\\.\C:
-\\.\E:
-\\.\F:
-\\.\G:

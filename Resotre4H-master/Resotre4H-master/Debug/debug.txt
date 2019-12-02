@@ -1,3 +1,0 @@
-Chosen drive: \\.\E:
-Input pattern: isRunning = 0
-Input length:  13
