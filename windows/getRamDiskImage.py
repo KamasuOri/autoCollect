@@ -35,7 +35,8 @@ def getDriveStoreable(checkRamOrDisk):
 		totalSizeRequest=cDriveSize
 
 	for a in c.Win32_LogicalDisk():
-		if (long(a.size)-long(a.Freespace) ) > totalSizeRequest:
+		# if (long(a.size)-long(a.Freespace) ) > totalSizeRequest:
+		if (long(a.Freespace) ) > totalSizeRequest:
 			ret.append(a.DeviceID)
 	for a in ret:
 		if len(a)==0:
