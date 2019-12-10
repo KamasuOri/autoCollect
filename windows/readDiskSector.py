@@ -32,13 +32,13 @@ def getNumberOfPhysicalDrive():
 			break
 	return count-1
 
-def getDataOfEntry(physicalNum):
+def getDataOfEntryOfOldDiskType(physicalNum):
 	global workDrive
 	count=1
 	try:	
 		drive = open("\\\\.\\PhysicalDrive"+physicalNum,"rb")
 		drive.seek(2*SECTOR_SIZE)
-		retData = np.zeros((100,3))									#start at 1
+		retData = np.zeros((100,3))
 		while drive.read(5) != "\x00\x00\x00\x00\x00":
 			drive.read(0x20-5)
 			firstLBA = drive.read(8)
@@ -51,12 +51,13 @@ def getDataOfEntry(physicalNum):
 			retData[count][2]=((lastLBA-firstLBA)*512)*10**(-9)
 			drive.read(ENTRY_SIZE-0x30)
 			count +=1
-		retData[0][0]=count-1		# count saver
+		retData[0][0]=count-1
 		drive.close()
 	except:
 		print "Fail in getNumberOfEntry"
 		exit()
 	return retData
+
 
 def getDriveStoreable(totalSizeRequest):
 	enoughMem2SaveDisk=0
@@ -77,41 +78,68 @@ def getDriveStoreable(totalSizeRequest):
 def readSectors(physicalNum,entryData,start_sector,sectors_to_read):
 	try:
 		drive = open("\\\\.\\PhysicalDrive"+physicalNum,"rb")
+		print "1"
 		drive.seek(SECTOR_SIZE*(entryData[0]+start_sector))
-		
+		print "2"
 
-		listDriveStoreable = getDriveStoreable(sectors_to_read*512)
-		inOrNot=0
+		# listDriveStoreable = getDriveStoreable(sectors_to_read*512)
+		# inOrNot=0
 		currentPath=os.getcwd()
-		currentDrive = os.getcwd()[0:1]
-		if len(listDriveStoreable) == 0:
-			GUI.messageBox("Disk problem","11111")
-			log.log(2,"get ramImage")
-			return 0
+		# currentDrive = os.getcwd()[0:1]
+		# if len(listDriveStoreable) == 0:
+		# 	GUI.messageBox("Disk problem","11111")
+		# 	log.log(2,"get ramImage")
+		# 	return 0
 			
-		for a in listDriveStoreable:
-			if currentDrive.lower() in a.lower():
-				inOrNot=1
+		# for a in listDriveStoreable:
+		# 	if currentDrive.lower() in a.lower():
+		# 		inOrNot=1
 
-		if inOrNot == 0:
-			GUI.messageBox("Disk problem","You will find REPORT in "+listDriveStoreable[0]+" drive cause current drive not enough to store !")
-			currentPath = listDriveStoreable[0]
+		# if inOrNot == 0:
+		# 	GUI.messageBox("Disk problem","You will find REPORT in "+listDriveStoreable[0]+" drive cause current drive not enough to store !")
+		# 	currentPath = listDriveStoreable[0]
 		execCMD('mkdir '+currentPath+'\\REPORT\\splitDiskImake')
+		print "3"
 		ret = open(currentPath+'\\REPORT\\splitDiskImake\\'+"ret","ab")
+		print "3a"
 		for i in range (sectors_to_read):
 			ret.write(drive.read(SECTOR_SIZE))
+		print "4"
 		ret.close()
 		drive.close()
 	except:
 		print "fail in readSectors !"
 
+def getDataOfEntryOfNewDiskType(physicalNum):
+
+	count=1
+		
+	drive = open("\\\\.\\PhysicalDrive"+physicalNum,"rb")
+	drive.read(0x1be)
+	retData = np.zeros((100,3))	#start at 1
+									
+	for i in range (4):
+		if drive.read(8) != "\x00\x00\x00\x00\x00\x00\x00\x00":
+
+			firstSector = drive.read(4)
+			firstSector = int(unpack("<I",firstSector)[0])
+			totalSector = drive.read(4)
+			totalSector = int(unpack("<I",totalSector)[0])
+			retData[count][0]=firstSector
+			retData[count][1]=totalSector
+			retData[count][2]=((totalSector)*512)*10**(-9)
+			count +=1
+	retData[0][0]=count-1		# count saver
+	drive.close()
+	return retData
+
 def start():
 	count = getNumberOfPhysicalDrive()
 	physicalNum = raw_input("Input the PhysicalDrive you want to read:")
-	entryData = getDataOfEntry(physicalNum)
+	entryData = getDataOfEntryOfNewDiskType(physicalNum)
 	print "PhysicalDrive",physicalNum," have ",int(entryData[0][0])," entry!"
 	for i in range(1,int(entryData[0][0])+1):
-		print i,": size = ",entryData[i][2]," GB, have ",int(entryData[i][1]-entryData[i][0])," sector."
+		print i,": size = ",entryData[i][2]," GB, have ",int(entryData[i][1])," sector."
 	entryRead = int(raw_input("Input the Entry you want to read:"))
 	start_sector = int(raw_input("Input the Sector you want to start:"))
 	sectors_to_read = int(raw_input("Input the number of Sectors you want to read:"))
