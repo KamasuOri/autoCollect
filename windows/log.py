@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf8 -*-
 '''
 a==1 	= success
 a==2	= fail

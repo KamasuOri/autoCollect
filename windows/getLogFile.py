@@ -1,4 +1,5 @@
-# -*- Coding: utf8 -*-
+#!/usr/bin/python
+# -*- coding: utf8 -*-
 import zipfile
 import sys
 import subprocess as sub
