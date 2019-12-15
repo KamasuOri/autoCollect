@@ -223,20 +223,7 @@ public class GUI extends javax.swing.JFrame {
     private void startButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButActionPerformed
         // TODO add your handling code here:
         String PathToPythonExec = "start.exe";
-        if(isAdmin()){
-//            JFileChooser fileChooser = new JFileChooser();
-//            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-//            int result = fileChooser.showOpenDialog(this);
-//            if (result == JFileChooser.APPROVE_OPTION) {
-//                File selectedFile = fileChooser.getSelectedFile();
-//                PathToPythonExec = selectedFile.getAbsolutePath();
-////                System.out.println(PathToPythonExec);               
-//            }
-//            int pos = PathToPythonExec.lastIndexOf("\\");
-////            System.out.println(pos); 
-//            String dirPath;
-//            dirPath = PathToPythonExec.substring(0,pos+1);
-//            System.out.println(dirPath); 
+        if(true){
             writeController();
             Desktop desktop = Desktop.getDesktop();
             try {
@@ -294,7 +281,10 @@ public class GUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        if (!isAdmin()){
+            JOptionPane.showMessageDialog(null, "Cần chạy với quyền admin", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+               System.exit(1);
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
