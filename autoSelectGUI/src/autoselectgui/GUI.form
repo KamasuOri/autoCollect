@@ -46,7 +46,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="startBut" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="getLoginHistoryCheck" min="-2" max="-2" attributes="0"/>
@@ -60,8 +60,10 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="getDiskImageCheck" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="ReadDiskImageByPhysicalDrive" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="ReadDiskImageByDeviceID" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="388" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="363" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -88,7 +90,11 @@
               <Component id="getRamImageCheck" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="getDiskImageCheck" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="118" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="ReadDiskImageByPhysicalDrive" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="ReadDiskImageByDeviceID" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="69" max="32767" attributes="0"/>
               <Component id="startBut" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
           </Group>
@@ -143,6 +149,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="getDiskImageCheck"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="ReadDiskImageByDeviceID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ReadDiskImageByDeviceID"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReadDiskImageByDeviceIDActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="ReadDiskImageByPhysicalDrive">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ReadDiskImageByPhysicalDrive"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReadDiskImageByPhysicalDriveActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

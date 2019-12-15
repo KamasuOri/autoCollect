@@ -21,7 +21,7 @@ import networkSetting
 import GUI
 import getUserFootPrint
 import getRamDiskImage
-
+import readDiskSector
 
 osSize=32
 
@@ -32,6 +32,7 @@ getBroswerCacheCheck = "0"
 getDiskImageCheck = "0"
 getRamImageCheck = "0"
 fmhn = "0"
+toolReakDiskManualCheck="0"
 
 def execCMD(command):
     p = sub.Popen(command,shell = True,stdout =sub.PIPE,stderr = sub.STDOUT)
@@ -58,6 +59,7 @@ def readControler():
 	global getBroswerCacheCheck
 	global getRamImageCheck
 	global getDiskImageCheck
+	global toolReakDiskManualCheck
 	try:
 		infile = open("control.txt","r").read().split("-")
 		getLoginHistoryCheck = infile[0]
@@ -67,6 +69,7 @@ def readControler():
 		getBroswerCacheCheck = infile[4]
 		getRamImageCheck = infile[5]
 		getDiskImageCheck = infile[6]
+		toolReakDiskManualCheck=infile[7]
 	except:
 		getLoginHistoryCheck = "0"
 		getProcessTreeCheck ="0"
@@ -75,6 +78,7 @@ def readControler():
 		getDiskImageCheck = "0"
 		getRamImageCheck = "0"
 		fmhn = "0"
+		toolReakDiskManualCheck="0"
 	
 
 
@@ -140,14 +144,20 @@ def startCollecter():
 			print "+++++++ Done Get Disk Image+++++++"
 		except:
 			print "***** Error while trying to get Disk Image *****"
-
+	if "0" not in toolReakDiskManualCheck:
+		try:
+			print "-------toolReakDiskManualCheck-------"	
+			readDiskSector.start(toolReakDiskManualCheck)
+			print "+++++++ Done toolReakDiskManualCheck+++++++"
+		except:
+			print "***** Error while trying to toolReakDiskManualCheck *****"
 def changeNameReportDir():
 	if os.path.exists('REPORT'):
 		pcname = os.environ['COMPUTERNAME']
 		macAddress =  hex(uuid.getnode())[2:-1]
 		macAddress = macAddress[0:2]+"-"+macAddress[2:4]+"-"+macAddress[4:6]+"-"+macAddress[6:8]+"-"+macAddress[8:10]+"-"+macAddress[10:12]
 		now = datetime.datetime.now()
-		date = str(now.hour)+"-"+str(now.minute)+"-"+str(now.day)+"-"+str(now.month)+"-"+str(now.year)
+		date = str(now.hour)+"-"+str(now.minute)+"-"+str(now.second)+"-"+str(now.day)+"-"+str(now.month)+"-"+str(now.year)
 		os.rename('REPORT', date)
 		newDir = pcname+"\\"+macAddress
 		cmd = "midir "+newDir

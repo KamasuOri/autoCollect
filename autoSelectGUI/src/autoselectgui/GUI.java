@@ -49,6 +49,8 @@ public class GUI extends javax.swing.JFrame {
         getBroswerCacheCheck = new javax.swing.JCheckBox();
         getRamImageCheck = new javax.swing.JCheckBox();
         getDiskImageCheck = new javax.swing.JCheckBox();
+        ReadDiskImageByDeviceID = new javax.swing.JCheckBox();
+        ReadDiskImageByPhysicalDrive = new javax.swing.JCheckBox();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -80,6 +82,20 @@ public class GUI extends javax.swing.JFrame {
 
         getDiskImageCheck.setText("getDiskImageCheck");
 
+        ReadDiskImageByDeviceID.setText("ReadDiskImageByDeviceID");
+        ReadDiskImageByDeviceID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReadDiskImageByDeviceIDActionPerformed(evt);
+            }
+        });
+
+        ReadDiskImageByPhysicalDrive.setText("ReadDiskImageByPhysicalDrive");
+        ReadDiskImageByPhysicalDrive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReadDiskImageByPhysicalDriveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,8 +117,10 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(fmhn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel1))
-                            .addComponent(getDiskImageCheck))
-                        .addGap(0, 388, Short.MAX_VALUE)))
+                            .addComponent(getDiskImageCheck)
+                            .addComponent(ReadDiskImageByPhysicalDrive)
+                            .addComponent(ReadDiskImageByDeviceID))
+                        .addGap(0, 363, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,7 +142,11 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(getRamImageCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(getDiskImageCheck)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ReadDiskImageByPhysicalDrive)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ReadDiskImageByDeviceID)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(startBut)
                 .addGap(109, 109, 109))
         );
@@ -177,7 +199,19 @@ public class GUI extends javax.swing.JFrame {
         else{
             control += "0-";
         }
-
+        
+        if (ReadDiskImageByPhysicalDrive.isSelected()){
+            control += "1-";
+        }
+        else{
+            
+            if (ReadDiskImageByDeviceID.isSelected()){
+                control += "2-";
+            }
+            else{
+                control += "1-";
+            }
+        }
         
         try (FileWriter writer = new FileWriter("control.txt");
              BufferedWriter bw = new BufferedWriter(writer)) {
@@ -220,6 +254,16 @@ public class GUI extends javax.swing.JFrame {
     private void getProcessTreeCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getProcessTreeCheckActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_getProcessTreeCheckActionPerformed
+
+    private void ReadDiskImageByPhysicalDriveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadDiskImageByPhysicalDriveActionPerformed
+        // TODO add your handling code here:
+        ReadDiskImageByDeviceID.setSelected(false);
+    }//GEN-LAST:event_ReadDiskImageByPhysicalDriveActionPerformed
+
+    private void ReadDiskImageByDeviceIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadDiskImageByDeviceIDActionPerformed
+        // TODO add your handling code here:
+        ReadDiskImageByPhysicalDrive.setSelected(false);
+    }//GEN-LAST:event_ReadDiskImageByDeviceIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,6 +328,8 @@ public class GUI extends javax.swing.JFrame {
     }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox ReadDiskImageByDeviceID;
+    private javax.swing.JCheckBox ReadDiskImageByPhysicalDrive;
     private javax.swing.JTextField fmhn;
     private javax.swing.JCheckBox getBroswerCacheCheck;
     private javax.swing.JCheckBox getDiskImageCheck;

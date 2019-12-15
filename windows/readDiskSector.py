@@ -22,6 +22,8 @@ def execCMD(command):
     output,errors = p.communicate()  
     return output
 
+#////////////////////////// option 1 //////////////////////
+
 def getNumberOfPhysicalDrive():
 	count =0
 	c = wmi.WMI()
@@ -33,6 +35,7 @@ def getNumberOfPhysicalDrive():
 		except:
 			break
 	return count-1
+
 
 def getDataOfEntryOfOldDiskType(physicalNum):
 	global workDrive
@@ -77,7 +80,7 @@ def getDriveStoreable(totalSizeRequest):
 			ret.remove(a)
 	return ret
 
-def readSectors(physicalNum,entryData,start_sector,sectors_to_read):
+def readSectors(physicalNum,entryData,start_sector,sectors_to_read): #ByPhysicalDrive
 	try:
 		drive = open("\\\\.\\PhysicalDrive"+physicalNum,"rb")
 		print "1"
@@ -101,12 +104,9 @@ def readSectors(physicalNum,entryData,start_sector,sectors_to_read):
 		# 	GUI.messageBox("Disk problem","You will find REPORT in "+listDriveStoreable[0]+" drive cause current drive not enough to store !")
 		# 	currentPath = listDriveStoreable[0]
 		execCMD('mkdir '+currentPath+'\\REPORT\\splitDiskImake')
-		print "3"
 		ret = open(currentPath+'\\REPORT\\splitDiskImake\\'+"ret","ab")
-		print "3a"
 		for i in range (sectors_to_read):
 			ret.write(drive.read(SECTOR_SIZE))
-		print "4"
 		ret.close()
 		drive.close()
 	except:
@@ -134,8 +134,7 @@ def getDataOfEntryOfNewDiskType(physicalNum):
 	retData[0][0]=count-1		# count saver
 	drive.close()
 	return retData
-
-def start():
+def startReadByPhysicalDrive():
 	count = getNumberOfPhysicalDrive()
 	physicalNum = raw_input("Input the PhysicalDrive you want to read:")
 	entryData = getDataOfEntryOfNewDiskType(physicalNum)
@@ -147,4 +146,64 @@ def start():
 	sectors_to_read = int(raw_input("Input the number of Sectors you want to read:"))
 	readSectors(physicalNum,entryData[entryRead],start_sector,sectors_to_read)
 
-start()
+
+#////////////////////////// option 2 //////////////////////
+
+def getDeviceIDAndSector():
+	c = wmi.WMI ()
+	c.Win32_OperatingSystem()[0].Caption
+	c.Win32_LogicalDisk()[0]
+	ret = ['']
+	count=0
+	for a in c.Win32_LogicalDisk():
+		ret.append(a.DeviceID)
+		print a.DeviceID,"     ",str(int(a.Size)/512)
+	return ret
+def getSectorOfDeviceID(DeviceID):
+	c = wmi.WMI ()
+	c.Win32_OperatingSystem()[0].Caption
+	c.Win32_LogicalDisk()[0]
+	for a in c.Win32_LogicalDisk():
+		if DeviceID.upper() in a.DeviceID:
+			return int(a.Size)/512
+	return 0
+def readSectorsByDeviceID(physicalNum,start_sector,sectors_to_read):
+	try:
+		drive = open("\\\\.\\"+physicalNum,"rb")
+		drive.seek(SECTOR_SIZE*(start_sector))
+		currentPath=os.getcwd()
+		execCMD('mkdir '+currentPath+'\\REPORT\\splitDiskImake')
+		ret = open(currentPath+'\\REPORT\\splitDiskImake\\'+"ret","ab")
+		for i in range (sectors_to_read):
+			ret.write(drive.read(SECTOR_SIZE))
+		ret.close()
+		drive.close()
+	except:
+		print "fail in readSectors !"
+
+def startReadByDeviceID():
+	print "Device   Total Sector"
+	device = getDeviceIDAndSector()
+	deviceinput = raw_input("Input device tou want to read:").replace("\n","")
+	checkin=0
+	for a in device:
+		if deviceinput.upper() in a:
+			checkin =1
+			break
+	if checkin ==0:
+		return 0
+	totalSector = getSectorOfDeviceID(deviceinput)
+	start_sector = int(raw_input("Input the Sector you want to start:"))
+	sectors_to_read = int(raw_input("Input the number of Sectors you want to read:"))
+	if int(totalSector) < int(start_sector) or int(totalSector) < int(sectors_to_read) or (int(sectors_to_read) + int(start_sector))>int(totalSector):
+		print "fail"
+		return 0
+	readSectorsByDeviceID(deviceinput+":",start_sector,sectors_to_read)
+def start(option="1"):		# option = 1 -> read by PhysicalDrive
+						# option = 2 -> read by DeviceID
+	print "1111111"
+	if option == "1":
+		startReadByPhysicalDrive()
+	if option == "2":
+		startReadByDeviceID()
+
