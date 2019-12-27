@@ -40,6 +40,7 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         startBut = new javax.swing.JButton();
         getLoginHistoryCheck = new javax.swing.JCheckBox();
         getProcessTreeCheck = new javax.swing.JCheckBox();
@@ -53,6 +54,19 @@ public class GUI extends javax.swing.JFrame {
         ReadDiskImageByPhysicalDrive = new javax.swing.JCheckBox();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,31 +115,27 @@ public class GUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(startBut))
+                    .addComponent(getLoginHistoryCheck)
+                    .addComponent(getProcessTreeCheck)
+                    .addComponent(getNetworkConfigCheck)
+                    .addComponent(getBroswerCacheCheck)
+                    .addComponent(getRamImageCheck)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(getLoginHistoryCheck)
-                            .addComponent(getProcessTreeCheck)
-                            .addComponent(getNetworkConfigCheck)
-                            .addComponent(getBroswerCacheCheck)
-                            .addComponent(getRamImageCheck)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(fmhn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))
-                            .addComponent(getDiskImageCheck)
-                            .addComponent(ReadDiskImageByPhysicalDrive)
-                            .addComponent(ReadDiskImageByDeviceID))
-                        .addGap(0, 363, Short.MAX_VALUE)))
+                        .addComponent(fmhn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addComponent(getDiskImageCheck)
+                    .addComponent(ReadDiskImageByPhysicalDrive)
+                    .addComponent(ReadDiskImageByDeviceID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addComponent(startBut)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(getLoginHistoryCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -209,7 +219,7 @@ public class GUI extends javax.swing.JFrame {
                 control += "2-";
             }
             else{
-                control += "1-";
+                control += "0-";
             }
         }
         
@@ -244,12 +254,12 @@ public class GUI extends javax.swing.JFrame {
 
     private void ReadDiskImageByPhysicalDriveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadDiskImageByPhysicalDriveActionPerformed
         // TODO add your handling code here:
-        ReadDiskImageByDeviceID.setSelected(false);
+       ReadDiskImageByDeviceID.setSelected(false);
     }//GEN-LAST:event_ReadDiskImageByPhysicalDriveActionPerformed
 
     private void ReadDiskImageByDeviceIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadDiskImageByDeviceIDActionPerformed
         // TODO add your handling code here:
-        ReadDiskImageByPhysicalDrive.setSelected(false);
+       ReadDiskImageByPhysicalDrive.setSelected(false);
     }//GEN-LAST:event_ReadDiskImageByDeviceIDActionPerformed
 
     /**
@@ -328,6 +338,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox getProcessTreeCheck;
     private javax.swing.JCheckBox getRamImageCheck;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton startBut;
     // End of variables declaration//GEN-END:variables
