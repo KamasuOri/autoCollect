@@ -6,12 +6,15 @@
 package servergui;
 
 import servergui.updateGUI;
+import servergui.remakeReportDataFile;
 /**
  *
  * @author LuanPD
  */
 public class mainGUI extends javax.swing.JFrame {
+
     updateGUI updateGUIStart = new updateGUI();
+    remakeReportDataFile remakeReportDataFileStart = new remakeReportDataFile();
     /**
      * Creates new form mainGUI
      */
@@ -29,6 +32,7 @@ public class mainGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         updateButton = new javax.swing.JButton();
+        remakeReportDataFileButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,21 +43,32 @@ public class mainGUI extends javax.swing.JFrame {
             }
         });
 
+        remakeReportDataFileButton.setText("Remake Report Data File");
+        remakeReportDataFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remakeReportDataFileButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(remakeReportDataFileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(remakeReportDataFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         pack();
@@ -61,8 +76,16 @@ public class mainGUI extends javax.swing.JFrame {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        updateGUIStart.start();
+
+        updateGUIStart.setVisible(true);
+        updateGUIStart.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void remakeReportDataFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remakeReportDataFileButtonActionPerformed
+        // TODO add your handling code here:
+        remakeReportDataFileStart.setVisible(true);
+        remakeReportDataFileStart.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_remakeReportDataFileButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,13 +117,16 @@ public class mainGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new mainGUI().setVisible(true);
-                
+                mainGUI main = new mainGUI();
+                main.setVisible(true);
+                main.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton remakeReportDataFileButton;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

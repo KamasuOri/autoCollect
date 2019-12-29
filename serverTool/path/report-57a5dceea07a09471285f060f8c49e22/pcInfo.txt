@@ -1,0 +1,17 @@
+Get Login History
+Get Process Tree||Get Nerwork Config||
++--------+
+22-23-3-29-12-2019
++--------+
+DESKTOP-K6N5B97
++--------+
+EEA8A949-E229-7CCE-F006-B06EBFD18E36
++--------+
+AMD Ryzen 5 2600X Six-Core Processor           
++--------+
+    B0-6E-BF-D1-8E-36
+    00-50-56-C0-00-01
+    00-50-56-C0-00-08
++--------+
+46e390304488c431b4999861b6e08bc2
++--------+

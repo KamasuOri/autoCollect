@@ -1,0 +1,3 @@
+remakeReportDataFile
+D:\3DAIHOC\5\1\project3\autoCollect\serverTool\path
+D:\3DAIHOC\5\1\project3\autoCollect\serverTool\DB

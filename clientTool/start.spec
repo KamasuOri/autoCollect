@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['start.py'],
-             pathex=['D:\\3DAIHOC\\5\\1\\project3\\autoCollect\\pyTool'],
+             pathex=['D:\\3DAIHOC\\5\\1\\project3\\autoCollect\\clientTool'],
              binaries=[],
              datas=[],
              hiddenimports=[],

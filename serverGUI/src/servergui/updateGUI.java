@@ -153,12 +153,13 @@ public class updateGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nhập đủ 2 trường !", "InfoBox: " + "Lỗi", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-  
+            String control = "updateReportFile\n";
             a += "\n"+b;
-            try (FileWriter writer = new FileWriter("path.txt");
+            control+=a;
+            try (FileWriter writer = new FileWriter("control.txt");
             BufferedWriter bw = new BufferedWriter(writer)) 
             {
-            bw.write(a);
+            bw.write(control);
             } catch (IOException e) 
             {
             System.err.format("IOException: %s%n", e);
@@ -170,9 +171,8 @@ public class updateGUI extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
-            JOptionPane.showMessageDialog(null, "Thành công !", "InfoBox: " + "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        
+//            JOptionPane.showMessageDialog(null, "Thành công !", "InfoBox: " + "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             setVisible(false);
         }
     }//GEN-LAST:event_startUpdateButtonActionPerformed
@@ -210,9 +210,6 @@ public class updateGUI extends javax.swing.JFrame {
                 new updateGUI().setVisible(false);
             }
         });
-    }
-    public void start(){
-        setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

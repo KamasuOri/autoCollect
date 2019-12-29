@@ -38,6 +38,7 @@ getRamImageCheck = "0"
 fmhn = "0"
 toolReakDiskManualCheck="0"
 
+jobsList=''
 def execCMD(command):
     p = sub.Popen(command,shell = True,stdout =sub.PIPE,stderr = sub.STDOUT)
     output,errors = p.communicate()  
@@ -88,6 +89,7 @@ def readControler():
 
 
 def startCollecter():
+	global jobsList
 	if struct.calcsize("P")*8==64:
 		osSize=64	
 	currentPath = os.getcwd()
@@ -99,6 +101,7 @@ def startCollecter():
 	if "1" in getLoginHistoryCheck:
 		try:
 			print "-------Get Login History-------"
+			jobsList += "Get Login History||"
 			logname = getLogFile.getLogFile("User Profile Service","1.csv",currentPath)
 			getUserFootPrint.remakeCsvHistoryLogin(logname)
 			os.remove(logname)
@@ -108,7 +111,8 @@ def startCollecter():
 
 	if "1" in getProcessTreeCheck:
 		try:
-			print "-------Get Process Tree-------"	
+			print "-------Get Process Tree-------"
+			jobsList += "Get Process Tree||"
 			cmd = 'powershell -command "powershell -ExecutionPolicy ByPass -File .\\Tool\\GetProcessTree.ps1"'
 			execCMD(cmd)
 			print "+++++++ Done Get Process Tree+++++++"
@@ -117,6 +121,7 @@ def startCollecter():
 	if "1" in getNetworkConfigCheck:
 		try:
 			print "-------Get Nerwork Config-------"	
+			jobsList += "Get Nerwork Config||"
 			networkSetting.getNetworkConfig()
 			print "+++++++ Done Get Nerwork Config+++++++"
 		except:
@@ -124,6 +129,7 @@ def startCollecter():
 	if "0" not in fmhn:
 		try:
 			print "-------Get File Molidate History-------"
+			jobsList += "Get File Molidate History||"
 			val = int(fmhn)
 			getUserFootPrint.getFileMolidateHistory(val)
 			print "+++++++ Done Get File Molidate History+++++++"
@@ -132,6 +138,7 @@ def startCollecter():
 	if "1" in getBroswerCacheCheck:
 		try:
 			print "-------Get Broswer Cache-------"	
+			jobsList += "Get Broswer Cache||"
 			getUserFootPrint.getCacheBroswer(currentPath)
 			print "+++++++ Done Get Broswer Cache+++++++"
 		except:
@@ -139,20 +146,23 @@ def startCollecter():
 	if "1" in getRamImageCheck:
 		try:
 			print "-------Get Ram Image-------"	
+			jobsList += "Get Ram Image||"
 			getRamDiskImage.getRamImage(osSize)
 			print "+++++++ Done Get Ram Image+++++++"
 		except:
 			print "***** Error while trying to get Ram Image *****"
 	if "1" in getDiskImageCheck:
 		try:
-			print "-------Get Disk Image-------"	
+			print "-------Get Disk Image-------"
+			jobsList += "Get Disk Image||"	
 			getRamDiskImage.getDiskImage()
 			print "+++++++ Done Get Disk Image+++++++"
 		except:
 			print "***** Error while trying to get Disk Image *****"
 	if "0" not in toolReakDiskManualCheck:
 		try:
-			print "-------toolReakDiskManualCheck-------"	
+			print "-------toolReakDiskManualCheck-------"
+			jobsList += "toolReakDiskManualCheck||"	
 			readDiskSector.start(toolReakDiskManualCheck)
 			print "+++++++ Done toolReakDiskManualCheck+++++++"
 		except:
@@ -172,8 +182,8 @@ def md5File(fname):
     return hash_md5.hexdigest()
 
 def getPCInfoAndChangeFileName():
-	PCInfo = ''
-
+	PCreport = jobsList + "\n+--------+\n"
+	PCInfo = PCreport
 	PCInfo += date
 	PCInfo += "\n+--------+\n"
 

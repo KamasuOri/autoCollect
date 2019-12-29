@@ -1,0 +1,3 @@
+updateReportFile
+D:\3DAIHOC\5\1\project3\autoCollect\release\server\report
+D:\3DAIHOC\5\1\project3\autoCollect\release\server\DB
