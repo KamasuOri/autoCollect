@@ -9,7 +9,6 @@ from subprocess import call
 from threading import Thread
 import os
 import ctypes
-from tkinter import *
 import struct
 import socket
 import uuid 
@@ -128,11 +127,11 @@ def startCollecter():
 			print "***** Error while trying to get Nerwork Config *****"
 	if "0" not in fmhn:
 		try:
-			print "-------Get File Molidate History-------"
-			jobsList += "Get File Molidate History||"
+			print "-------Get File Modified  History-------"
+			jobsList += "Get File Modified  History||"
 			val = int(fmhn)
 			getUserFootPrint.getFileMolidateHistory(val)
-			print "+++++++ Done Get File Molidate History+++++++"
+			print "+++++++ Done Get File Modified  History+++++++"
 		except ValueError:
 		   	print "***** Error while trying to get Nerwork Config Input Must Be A Number*****"
 	if "1" in getBroswerCacheCheck:

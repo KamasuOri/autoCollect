@@ -78,6 +78,11 @@ public class GUI extends javax.swing.JFrame {
         });
 
         getLoginHistoryCheck.setText("getLoginHistoryCheck");
+        getLoginHistoryCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getLoginHistoryCheckActionPerformed(evt);
+            }
+        });
 
         getProcessTreeCheck.setText("getProcessTreeCheck");
         getProcessTreeCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -261,6 +266,10 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
        ReadDiskImageByPhysicalDrive.setSelected(false);
     }//GEN-LAST:event_ReadDiskImageByDeviceIDActionPerformed
+
+    private void getLoginHistoryCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getLoginHistoryCheckActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getLoginHistoryCheckActionPerformed
 
     /**
      * @param args the command line arguments
